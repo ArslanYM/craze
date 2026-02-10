@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Calendar, Clapperboard, Mail, Youtube, Instagram, Play, ArrowRight, Zap, Sparkles } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
 export default function LandingPage() {
   return (
@@ -32,10 +33,23 @@ export default function LandingPage() {
             <Link href="#pricing" className="text-muted-foreground hover:text-foreground transition-colors">Pricing</Link>
           </nav>
           <div className="flex items-center gap-4">
-            <Link href="/login" className="text-sm font-medium text-muted-foreground hover:text-foreground hidden sm:block">
-              Log in
-            </Link>
-            <Button className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white shadow-lg shadow-indigo-500/25 border-0 rounded-full px-6">Get Started</Button>
+            <SignedOut>
+              <Link href="/sign-in" className="text-sm font-medium text-muted-foreground hover:text-foreground hidden sm:block">
+                Log in
+              </Link>
+              <Link href="/sign-up">
+                <Button className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white shadow-lg shadow-indigo-500/25 border-0 rounded-full px-6">Get Started</Button>
+              </Link>
+            </SignedOut>
+            <SignedIn>
+              <Link href="/dashboard">
+                <Button className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white shadow-lg shadow-indigo-500/25 border-0 rounded-full px-6 group">
+                  Dashboard
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </Link>
+              <UserButton />
+            </SignedIn>
           </div>
         </div>
       </header>
@@ -60,9 +74,20 @@ export default function LandingPage() {
             </p>
             
             <div className="mt-12 flex flex-col sm:flex-row gap-4 w-full justify-center">
-              <Button size="lg" className="h-14 px-8 text-lg rounded-full shadow-xl shadow-indigo-500/20 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white border-0 transition-transform hover:scale-105">
-                Start Creating Free <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
+              <SignedOut>
+                <Link href="/sign-up">
+                  <Button size="lg" className="h-14 px-8 text-lg rounded-full shadow-xl shadow-indigo-500/20 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white border-0 transition-transform hover:scale-105">
+                    Start Creating Free <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                </Link>
+              </SignedOut>
+              <SignedIn>
+                <Link href="/dashboard">
+                  <Button size="lg" className="h-14 px-8 text-lg rounded-full shadow-xl shadow-indigo-500/20 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white border-0 transition-transform hover:scale-105">
+                    Go to Dashboard <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                </Link>
+              </SignedIn>
               <Button size="lg" variant="outline" className="h-14 px-8 text-lg rounded-full border-2 hover:bg-muted/50 transition-colors">
                 View Demo
               </Button>
