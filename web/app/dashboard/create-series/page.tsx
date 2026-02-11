@@ -1,14 +1,14 @@
 import { DashboardLayout } from "@/components/dashboard-layout";
 
-export default function DashboardPage() {
+export default function CreateSeriesPage() {
   return (
     <DashboardLayout>
       <div>
         <h1 className="text-4xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 bg-clip-text text-transparent dark:from-indigo-400 dark:via-purple-400 dark:to-pink-400 mb-3">
-          Welcome to VidMaxx
+          Create New Series
         </h1>
         <p className="text-lg text-gray-600 dark:text-gray-400 font-medium">
-          Create, manage, and monitor your video series.
+          Start creating a new video series.
         </p>
       </div>
     </DashboardLayout>
