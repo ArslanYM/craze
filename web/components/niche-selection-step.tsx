@@ -105,8 +105,8 @@ export function NicheSelectionStep({
         </TabsList>
 
         <TabsContent value="available" className="space-y-4">
-          <div className="max-h-96 overflow-y-auto rounded-xl border border-white/20 bg-white/40 backdrop-blur-sm p-3 dark:border-white/10 dark:bg-white/5">
-            <div className="grid grid-cols-1 gap-2 md:grid-cols-3">
+          <div className="max-h-96 overflow-y-auto rounded-xl border border-white/20 bg-white/40 backdrop-blur-sm p-4 dark:border-white/10 dark:bg-white/5">
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
               {availableNiches.map((niche) => (
                 <NicheCard
                   key={niche.id}
@@ -120,13 +120,21 @@ export function NicheSelectionStep({
         </TabsContent>
 
         <TabsContent value="custom" className="space-y-4">
-          <div className="rounded-xl border border-white/20 bg-white/40 backdrop-blur-sm p-6 dark:border-white/10 dark:bg-white/5">
-            <Label htmlFor="custom-niche" className="text-base font-semibold">
-              Niche Name
-            </Label>
+          <div className="rounded-xl border border-white/20 bg-white/40 backdrop-blur-sm p-6 dark:border-white/10 dark:bg-white/5 shadow-lg">
+            <div className="mb-4">
+              <Label
+                htmlFor="custom-niche"
+                className="text-lg font-bold text-gray-900 dark:text-white"
+              >
+                Create Your Custom Niche
+              </Label>
+              <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                Define a unique niche for your content
+              </p>
+            </div>
             <Input
               id="custom-niche"
-              placeholder="Enter your custom niche"
+              placeholder="e.g., Gaming, Education, Comedy, Fitness..."
               value={customNiche}
               onChange={(e) => {
                 setCustomNiche(e.target.value);
@@ -134,11 +142,11 @@ export function NicheSelectionStep({
                   onNicheChange(e.target.value);
                 }
               }}
-              className="mt-2 border-white/20 bg-white/50 backdrop-blur-sm dark:border-white/10 dark:bg-white/5 placeholder:text-gray-400 dark:placeholder:text-gray-500"
+              className="border-white/30 bg-white/60 backdrop-blur-sm dark:border-white/20 dark:bg-white/10 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:border-indigo-500 h-11 text-base font-medium"
             />
-            <p className="mt-3 text-sm text-gray-600 dark:text-gray-400">
-              Describe what your content is about. Examples: "Gaming",
-              "Education", "Comedy"
+            <p className="mt-4 text-xs font-semibold text-indigo-600 dark:text-indigo-400 uppercase tracking-wide">
+              💡 Tip: Be specific and descriptive for better content
+              recommendations
             </p>
           </div>
         </TabsContent>
