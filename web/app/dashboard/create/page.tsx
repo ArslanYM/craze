@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { DashboardLayout } from "@/components/dashboard-layout";
 import { ProgressStepper } from "@/components/progress-stepper";
 import { NicheSelectionStep } from "@/components/niche-selection-step";
+import { LanguageVoiceSelectionStep } from "@/components/language-voice-selection-step";
 import { FormFooter } from "@/components/form-footer";
 
 const steps = [
@@ -49,7 +50,16 @@ export default function CreatePage() {
 
   const isFirstStep = currentStep === 1;
   const isLastStep = currentStep === steps.length;
-  const isCurrentStepValid = formData.niche ? true : false;
+
+  // Validate current step
+  let isCurrentStepValid = false;
+  if (currentStep === 1) {
+    isCurrentStepValid = !!formData.niche;
+  } else if (currentStep === 2) {
+    isCurrentStepValid = !!formData.language && !!formData.voice;
+  } else {
+    isCurrentStepValid = true;
+  }
 
   return (
     <DashboardLayout>
@@ -74,14 +84,14 @@ export default function CreatePage() {
             />
           )}
           {currentStep === 2 && (
-            <div className="text-center py-12">
-              <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500">
-                Language & Voice Selection
-              </h2>
-              <p className="mt-3 text-lg text-gray-600 dark:text-gray-400">
-                Coming soon...
-              </p>
-            </div>
+            <LanguageVoiceSelectionStep
+              selectedLanguage={formData.language}
+              selectedVoice={formData.voice}
+              onLanguageChange={(language) =>
+                updateFormData({ language, voice: undefined })
+              }
+              onVoiceChange={(voice) => updateFormData({ voice })}
+            />
           )}
           {currentStep > 2 && (
             <div className="text-center py-12">
